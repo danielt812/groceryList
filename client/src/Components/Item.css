@@ -1,0 +1,18 @@
+.item {
+	display: flex;
+	justify-content: center;
+}
+
+.item-component {
+	width: 200px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.fa-trash-alt {
+	color: red;
+}
+
+.fa-cart-plus {
+	color: green;
+}
