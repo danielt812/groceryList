@@ -1,0 +1,10 @@
+.add {
+	display: flex;
+	justify-content: center;
+}
+
+.add-component {
+	width: 200px;
+	display: flex;
+	justify-content: space-between;
+}
