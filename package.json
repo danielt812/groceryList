@@ -8,7 +8,7 @@
 		"server": "nodemon server.js",
 		"client": "npm start --prefix client",
 		"dev": "concurrently \"npm run server\" \"npm start --prefix client\"",
-		"heroku-postbuild": "cd client && npm run build"
+		"heroku-postbuild": "cd client && npm i && npm run build"
 	},
 	"engines": {
 		"node": "12.19.0"
