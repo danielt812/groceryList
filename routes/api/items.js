@@ -43,6 +43,12 @@ router.delete('/:id', (req, res) => {
 	);
 });
 
+router.delete('/', (req, res) => {
+	Item.deleteMany({})
+		.then(() => res.json({ deleted: true }))
+		.catch((err) => res.status(404).json({ success: false }));
+});
+
 // @route   PUT api/items
 // @desc    Modify an item
 // @access  Public

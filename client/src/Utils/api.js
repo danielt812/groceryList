@@ -7,6 +7,9 @@ export default {
 	deleteItem: (id) => {
 		return axios.delete('/api/items/' + id);
 	},
+	deleteAllItems: () => {
+		return axios.delete('/api/items');
+	},
 	addItem: (data) => {
 		return axios.post('/api/items', data);
 	}

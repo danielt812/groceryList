@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import Add from './Components/Add';
 import Item from './Components/Item';
+import Nav from './Components/Nav';
+import Clear from './Components/Clear';
 import api from '../src/Utils/api';
 import './App.css';
 
 class App extends Component {
 	state = {
 		loaded: false,
+		items: [],
 		newItem: ''
 	};
 
@@ -28,13 +31,22 @@ class App extends Component {
 		this.setState({ newItem: e.target.value });
 	};
 
+	clearItemsHandler = () => {
+		api.deleteAllItems().then(() => {
+			api.getItems().then(() => {
+				this.setState({
+					items: []
+				});
+			});
+		});
+	};
+
 	addItemHandler = () => {
 		api.addItem({ name: this.state.newItem }).then(() =>
 			api.getItems().then((res) => {
 				this.setState({ items: res.data, newItem: '' });
 			})
 		);
-		// const items = [...this.state.items];
 	};
 
 	deleteItemHandler = (index, id) => {
@@ -47,7 +59,7 @@ class App extends Component {
 	render() {
 		return (
 			<div className='App'>
-				<h1>Grocery List</h1>
+				<Nav />
 				<Add
 					value={this.state.newItem}
 					addItem={() => this.addItemHandler()}
@@ -65,6 +77,7 @@ class App extends Component {
 							);
 					  })
 					: null}
+				<Clear clearAll={this.clearItemsHandler} />
 			</div>
 		);
 	}
