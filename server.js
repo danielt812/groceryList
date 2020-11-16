@@ -1,8 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
+const dotenv = require('dotenv');
 
+// Import api routes
 const items = require('./routes/api/items');
 
+// Access to env variables
+dotenv.config();
+
+// Init express
 const app = express();
 
 // Express bodyparse
@@ -10,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // DB config
-const db = require('./config/keys').mongoURI;
+const db = process.env.mongoURI;
 
 mongoose
 	.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -20,6 +27,7 @@ mongoose
 // Use Routes
 app.use('/api/items', items);
 
+// If production build point to static files
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static('client/build'));
 }
