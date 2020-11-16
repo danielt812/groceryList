@@ -77,7 +77,9 @@ class App extends Component {
 							);
 					  })
 					: null}
-				<Clear clearAll={this.clearItemsHandler} />
+				{this.state.items.length > 0 ? (
+					<Clear clearAll={this.clearItemsHandler} />
+				) : null}
 			</div>
 		);
 	}
