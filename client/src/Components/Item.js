@@ -5,7 +5,12 @@ const Item = (props) => {
 	return (
 		<div className='item' id={props.id}>
 			<div className='item-component'>
-				<h2>{props.name}</h2>
+				<h2
+					className={props.active ? 'item-title active' : 'item-title'}
+					onClick={props.setActive}
+				>
+					{props.name}
+				</h2>
 				<div className='btn' onClick={props.deleteItem}>
 					<i className='fas fa-trash-alt'></i>
 				</div>

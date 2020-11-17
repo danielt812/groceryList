@@ -9,10 +9,22 @@
 	justify-content: space-between;
 }
 
+.item-title {
+	font-weight: 500;
+}
+
+.item-title:hover {
+	cursor: pointer;
+}
+
 .fa-trash-alt {
 	color: red;
 }
 
 .fa-cart-plus {
 	color: green;
+}
+
+.active {
+	text-decoration: line-through;
 }

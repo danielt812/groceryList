@@ -31,6 +31,14 @@ class App extends Component {
 		this.setState({ newItem: e.target.value });
 	};
 
+	activeItemHandler = (id) => {
+		api.updateActiveItem(id).then(() => {
+			api.getItems().then((res) => {
+				this.setState({ items: res.data });
+			});
+		});
+	};
+
 	clearItemsHandler = () => {
 		api.deleteAllItems().then(() => {
 			api.getItems().then(() => {
@@ -49,10 +57,10 @@ class App extends Component {
 		);
 	};
 
-	deleteItemHandler = (index, id) => {
+	deleteItemHandler = (i, id) => {
 		api.deleteItem(id);
 		const items = [...this.state.items];
-		items.splice(index, 1);
+		items.splice(i, 1);
 		this.setState({ items: items });
 	};
 
@@ -73,6 +81,8 @@ class App extends Component {
 									id={item._id}
 									name={item.name}
 									deleteItem={() => this.deleteItemHandler(i, item._id)}
+									setActive={() => this.activeItemHandler(item._id)}
+									active={item.active}
 								/>
 							);
 					  })

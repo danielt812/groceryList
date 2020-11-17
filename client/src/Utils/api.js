@@ -12,5 +12,8 @@ export default {
 	},
 	addItem: (data) => {
 		return axios.post('/api/items', data);
+	},
+	updateActiveItem: (id) => {
+		return axios.put('/api/items/' + id);
 	}
 };

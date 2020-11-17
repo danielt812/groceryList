@@ -52,13 +52,13 @@ router.delete('/', (req, res) => {
 // @route   PUT api/items
 // @desc    Modify an item
 // @access  Public
-// router.put('/:id', (req, res) => {
-// 	Item.findById(req.params.id).then((item) =>
-// 		item
-// 			.update({ name: req.body.name })
-// 			.then(() => res.json({ success: true }))
-// 			.catch((err) => res.status(404).json({ success: false }))
-// 	);
-// });
+router.put('/:id', (req, res) => {
+	Item.findById(req.params.id).then((item) =>
+		item
+			.update({ active: !item.active })
+			.then(() => res.json({ success: true }))
+			.catch((err) => res.status(404).json({ success: false }))
+	);
+});
 
 module.exports = router;
