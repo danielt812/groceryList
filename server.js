@@ -6,11 +6,11 @@ const dotenv = require('dotenv');
 // Import api routes
 const items = require('./routes/api/items');
 
-// Access to env variables
-dotenv.config();
-
 // Init express
 const app = express();
+
+// Access to env variables
+dotenv.config();
 
 // Express bodyparse
 app.use(express.json());
@@ -24,7 +24,7 @@ mongoose
 	.then(() => console.log('MongoDB Connected'))
 	.catch((err) => console.log(err));
 
-// Use Routes
+// Use routes
 app.use('/api/items', items);
 
 // If production build point to static files
