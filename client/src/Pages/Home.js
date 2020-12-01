@@ -31,6 +31,7 @@ class Home extends Component {
 				ItemAPI.getItems()
 					.then((res) => {
 						if (res.data) {
+							console.log(this.state.sort);
 							if (this.state.sort === 'Name') {
 								res.data.sort(sortByName);
 							} else {
