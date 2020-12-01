@@ -6,7 +6,7 @@ const Item = (props) => {
 		<div className='item' id={props.id}>
 			<div className='item-component'>
 				<h2
-					className={props.active ? 'item-title active' : 'item-title'}
+					className={props.active ? 'item-title line-through' : 'item-title'}
 					onClick={props.setActive}
 				>
 					{props.name}

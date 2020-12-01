@@ -27,6 +27,6 @@
 	color: green;
 }
 
-.active {
+.line-through {
 	text-decoration: line-through;
 }

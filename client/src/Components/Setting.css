@@ -1,0 +1,15 @@
+.settings-flex {
+	display: flex;
+	justify-content: center;
+}
+
+.setting-flex {
+	display: flex;
+	justify-content: space-between;
+	width: 200px;
+}
+
+label {
+	font-weight: 600;
+	font-size: 1.1rem;
+}

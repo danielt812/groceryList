@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 
 // Import api routes
 const items = require('./routes/api/items');
+const settings = require('./routes/api/settings');
 
 // Init express
 const app = express();
@@ -23,9 +24,11 @@ mongoose
 	.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
 	.then(() => console.log('MongoDB Connected'))
 	.catch((err) => console.log(err));
+mongoose.set('useFindAndModify', false);
 
 // Use routes
 app.use('/api/items', items);
+app.use('/api/settings', settings);
 
 // If production build point to static files
 if (process.env.NODE_ENV === 'production') {
