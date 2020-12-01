@@ -23,15 +23,10 @@ class Home extends Component {
 	};
 
 	componentDidMount() {
-		SettingsAPI.getSettings()
-			.then((res) => {
-				this.setState({ sort: res.data[0].sort });
-				console.log('this should happen first');
-			})
-			.then(
+		SettingsAPI.getSettings().then((res) => {
+			this.setState({ sort: res.data[0].sort }, () => {
 				ItemAPI.getItems()
 					.then((res) => {
-						console.log('this should happen second');
 						if (res.data) {
 							console.log(this.state);
 							if (this.state.sort === 'Name') {
@@ -45,8 +40,9 @@ class Home extends Component {
 							});
 						}
 					})
-					.catch((err) => console.log(err))
-			);
+					.catch((err) => console.log(err));
+			});
+		});
 	}
 
 	handleChange = (e) => {
