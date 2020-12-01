@@ -28,7 +28,6 @@ class Home extends Component {
 				ItemAPI.getItems()
 					.then((res) => {
 						if (res.data) {
-							console.log(this.state);
 							if (this.state.sort === 'Name') {
 								res.data.sort(sortByName);
 							} else {
@@ -51,44 +50,53 @@ class Home extends Component {
 
 	activeItemHandler = (id) => {
 		ItemAPI.updateActiveItem(id).then(() => {
-			ItemAPI.getItems().then((res) => {
-				if (this.state.sort === 'Name') {
-					res.data.sort(sortByName);
-				} else {
-					res.data.sort(sortByDate);
-				}
-				this.setState({ items: res.data });
+			// Create copy of state
+			const items = [...this.state.items];
+			// Find index of item we want to mutate
+			const index = items.findIndex((item) => {
+				return item._id === id;
 			});
+			// Change active status to opposite value
+			items[index].active = !items[index].active;
+			// Set State with mutated copy
+			this.setState({ items: items });
 		});
 	};
 
 	clearItemsHandler = () => {
+		// Http req to delete all items
 		ItemAPI.deleteAllItems().then(() => {
-			ItemAPI.getItems().then(() => {
-				this.setState({
-					items: []
-				});
-			});
+			// Set state to empty array
+			this.setState({ items: [] });
 		});
 	};
 
 	addItemHandler = () => {
-		ItemAPI.addItem({ name: this.state.newItem }).then(() =>
-			ItemAPI.getItems().then((res) => {
-				if (this.state.sort === 'Name') {
-					res.data.sort(sortByName);
-				} else {
-					res.data.sort(sortByDate);
-				}
-				this.setState({ items: res.data, newItem: '' });
-			})
-		);
+		// Http req to add new item
+		ItemAPI.addItem({ name: this.state.newItem }).then((res) => {
+			// Store new item
+			let newItem = res.data;
+			// Make copy of state and add new item to copy
+			let items = [...this.state.items, newItem];
+			// Sort copy
+			if (this.state.sort === 'Name') {
+				items.sort(sortByName);
+			} else {
+				items.sort(sortByDate);
+			}
+			// Set state
+			this.setState({ items: items, newItem: '' });
+		});
 	};
 
 	deleteItemHandler = (i, id) => {
+		// Http req to delete item
 		ItemAPI.deleteItem(id);
+		// Make copy of state
 		const items = [...this.state.items];
+		// Splice copy at index
 		items.splice(i, 1);
+		// Set state of items
 		this.setState({ items: items });
 	};
 
