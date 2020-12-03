@@ -112,7 +112,7 @@ class Home extends Component {
 					? this.state.items.map((item, i) => {
 							return (
 								<Item
-									key={i}
+									key={item._id}
 									id={item._id}
 									name={item.name}
 									deleteItem={() => this.deleteItemHandler(i, item._id)}
