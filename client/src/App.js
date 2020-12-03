@@ -5,16 +5,16 @@ import Nav from './Components/Nav';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-export default function App() {
+const App = () => {
 	return (
 		<Router>
-			<div>
-				<Nav />
-				<Switch>
-					<Route exact path='/' component={Home} />
-					<Route exact path='/settings' component={Settings} />
-				</Switch>
-			</div>
+			<Nav />
+			<Switch>
+				<Route exact path='/' component={Home} />
+				<Route exact path='/settings' component={Settings} />
+			</Switch>
 		</Router>
 	);
-}
+};
+
+export default App;
